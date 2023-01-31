@@ -4,6 +4,8 @@ import bwg.tutorials.resttutorial.assembler.EmployeeModelAssembler;
 import bwg.tutorials.resttutorial.exception.EmployeeNotFoundException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,8 +37,12 @@ public class EmployeeController {
     // end::get-aggregate-root[]
 
     @PostMapping("/employees")
-    public Employee newEmployee(@RequestBody Employee newEmployee) {
-        return repository.save(newEmployee);
+    public ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) {
+        EntityModel<Employee> entityModel = assembler.toModel(repository.save(newEmployee));
+
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
+        //return repository.save(newEmployee);
     }
 
     // Single item

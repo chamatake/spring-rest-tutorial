@@ -11,13 +11,25 @@ public class Employee {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String role;
 
     Employee() {} // empty constructor for the sake of JPA
-    Employee(String name, String role) {
-        this.name = name;
+    Employee(String firstName, String lastName, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
+    }
+
+    public String getName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public void setName(String name) {
+        String[] nameParts = name.split(" ");
+        this.firstName = nameParts[0];
+        this.lastName = nameParts[1];
     }
 
     public Long getId() {
@@ -28,12 +40,20 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getRole() {
@@ -50,13 +70,14 @@ public class Employee {
         if (!(o instanceof Employee)) return false;
         Employee tempEmployee = (Employee) o;
         return Objects.equals(this.id, tempEmployee.id)
-                && Objects.equals(this.name, tempEmployee.name)
+                && Objects.equals(this.firstName, tempEmployee.firstName)
+                && Objects.equals(this.lastName, tempEmployee.lastName)
                 && Objects.equals(this.role, tempEmployee.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.role);
+        return Objects.hash(this.id, this.firstName, this.lastName, this.role);
     }
 
     @Override
@@ -65,8 +86,11 @@ public class Employee {
         return sb.append("Employee{")
                 .append("id=")
                 .append(this.id)
-                .append(", name='")
-                .append(this.name)
+                .append(", firstName='")
+                .append(this.firstName)
+                .append("\'")
+                .append(", lastName='")
+                .append(this.lastName)
                 .append("\'")
                 .append(", role='")
                 .append(this.role)
