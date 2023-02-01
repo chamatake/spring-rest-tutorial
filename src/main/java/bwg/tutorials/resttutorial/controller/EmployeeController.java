@@ -1,5 +1,7 @@
-package bwg.tutorials.resttutorial;
+package bwg.tutorials.resttutorial.controller;
 
+import bwg.tutorials.resttutorial.Employee;
+import bwg.tutorials.resttutorial.repository.EmployeeRepository;
 import bwg.tutorials.resttutorial.assembler.EmployeeModelAssembler;
 import bwg.tutorials.resttutorial.exception.EmployeeNotFoundException;
 import org.springframework.hateoas.CollectionModel;

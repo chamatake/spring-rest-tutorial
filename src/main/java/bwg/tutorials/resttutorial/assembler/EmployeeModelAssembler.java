@@ -1,7 +1,7 @@
 package bwg.tutorials.resttutorial.assembler;
 
 import bwg.tutorials.resttutorial.Employee;
-import bwg.tutorials.resttutorial.EmployeeController;
+import bwg.tutorials.resttutorial.controller.EmployeeController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
